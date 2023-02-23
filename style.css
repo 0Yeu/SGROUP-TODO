@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+  font-size: 1rem;
+  font-family: "Plus Jakata Sans", sans-serif;
+}
+
+.container{
+  max-width: 1500px;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+.header .header_wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  line-height: 2rem;
+  margin-top: 37px;
+}
+
+.header .header_wrapper .header_logo > img{
+  width: 171px;
+  height: 58 px;
+}
+
+.header .header_wrapper .header_logo p {
+  display: flex;
+}
+
+.header .header_wrapper .header_logo p img {
+  width: 23px;
+  height: 23px;
+  margin-left: 5px;
+}
+
+.header .header_wrapper .header_newtask {
+  margin-right: 5px;
+}
+
