@@ -43,3 +43,59 @@ body{
   margin-right: 5px;
 }
 
+.todo {
+  margin-top: 20px;
+}
+
+.todo .todo_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -20px;
+}
+
+.todo .todo_wrapper .todo_item {
+  flex-basis: 33%;
+  padding: 0 20px;
+}
+
+.todo .todo_wrapper .todo_item .todo_item_border {
+  padding-bottom: 15px;
+  border-bottom: 2px solid #00a6da;
+}
+
+.todo .todo_wrapper .todo_item .todo_item_border.doing {
+  border-bottom: 2px solid rgba(204, 172, 3, 0.56);
+}
+
+.todo .todo_wrapper .todo_item .todo_item_border.doing .todo_item_title {
+  background-color: rgba(204, 172, 3, 0.56);
+}
+
+.todo .todo_wrapper .todo_item .todo_item_border.finished {
+  border-bottom: 2px solid#3bc057;
+}
+
+.todo .todo_wrapper .todo_item .todo_item_border.finished .todo_item_title {
+  background-color: #3bc057;
+}
+
+.todo .todo_wrapper .todo_item .todo_item_border .todo_item_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 34px;
+  background-color: #00a6da;
+  padding: 0 9px;
+  color: white;
+  font-weight: 700;
+  border-radius: 4px;
+}
+.todo .todo_wrapper .todo_item .todo_item_border .todo_item_title .count_todo span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  font-size: 1.4rem;
+  border-radius: 4px;
+}
