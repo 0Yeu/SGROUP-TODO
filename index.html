@@ -73,5 +73,44 @@
         </div>
       </div>
     </div>
+    <div class="overlay"></div>
+			<div class="newtask_form">
+				<h1 class="title">Add new todo</h1>
+				<form action="">
+					<div class="form_group">
+						<input id="input_element" type="text" placeholder="Category Etc : Marketing" name="category" />
+					</div>
+					<div class="form_group">
+						<input id="input_element" type="text" placeholder="Title" name="title" />
+					</div>
+					<div class="form_group">
+						<textarea id="input_element" name="content" id="" cols="30" rows="10" placeholder="Content"></textarea>
+					</div>
+					<div class="status">
+						<div class="status_item">
+							<input type="radio" id="Todo" name="status" value="TODO_TYPE" />
+							<label for="Todo">Todo</label>
+							<br />
+						</div>
+						<div class="status_item">
+							<input type="radio" id="Doing" name="status" value="TODO_DOING_TYPE" />
+							<label for="Doing">Doing</label>
+							<br />
+						</div>
+						<div class="status_item">
+							<input type="radio" id="Finished" name="status" value="TODO_FINISHED_TYPE" />
+							<label for="Finished">Finished</label>
+							<br />
+						</div>
+					</div>
+					<button type="submit" class="btn_submit">Submit</button>
+				</form>
+				<div class="icon_close">
+					<i class="fas fa-times"></i>
+				</div>
+			</div>
+		</div>
+		<script
+			src="./script.js" type="text/javascript"></script>
   </body>
 </html>
