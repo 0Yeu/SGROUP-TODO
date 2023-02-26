@@ -136,3 +136,136 @@ const handleEdit = (id) => {
     })
 }
 
+const handleDelete = async (id) => {
+    try {
+        await callAPI(
+            `https://637b954d10a6f23f7fad790a.mockapi.io/todo/${id}`,
+            'DELETE'
+        )
+        todos = todos.filter((todo) => todo.id != id)
+        localStorage.setItem('todo', JSON.stringify(todos))
+        render()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const render = () => {
+    let htmlTodos = ''
+    let htmlTodosDoing = ''
+    let htmlTodosFinished = ''
+
+    const countCategoryTodo = {
+        todo: 0,
+        doing: 0,
+        finished: 0,
+    }
+
+    todos.forEach((todo) => {
+        switch (todo.status) {
+            case TODO_TYPE: {
+                htmlTodos += generateTodoHTML(todo)
+                countCategoryTodo.todo += 1
+                break
+            }
+            case TODO_DOING_TYPE: {
+                htmlTodosDoing += generateTodoHTML(todo)
+                countCategoryTodo.doing += 1
+
+                break
+            }
+            case TODO_FINISHED_TYPE: {
+                htmlTodosFinished += generateTodoHTML(todo)
+                countCategoryTodo.finished += 1
+                break
+            }
+        }
+    })
+    listTodoElement.innerHTML = htmlTodos
+    listTodoDoingElement.innerHTML = htmlTodosDoing
+    listTodoFinishedElemnt.innerHTML = htmlTodosFinished
+
+    countTodos.forEach((categoryTodoCount) => {
+        categoryTodoCount.innerText = countCategoryTodo[categoryTodoCount.id]
+    })
+}
+
+const addTodo = async () => {
+    const newTodo = {
+        ...todo,
+        id: Math.random(),
+        status: TODO_TYPE,
+        date: getCurrentDate(),
+    }
+
+    try {
+        const data = await callAPI(
+            'https://63f1c676aab7d09125fb305f.mockapi.io/todo',
+            'POST',
+            newTodo
+        )
+        todos.push(data)
+        localStorage.setItem('todo', JSON.stringify(todos))
+        render()
+        clearFormTodoValue()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const updateTodo = async () => {
+    let valueStatus = ''
+    statusTodo.forEach((st) => {
+        if (st.checked) {
+            valueStatus = st.value
+        }
+    })
+    const todoUpadte = { ...todo, status: valueStatus }
+    try {
+        const data = await callAPI(
+            `https://63f1c676aab7d09125fb305f.mockapi.io/todo/${todoUpadte.id}`,
+            'PUT',
+            todoUpadte
+        )
+        todos = todos.map((it) => (it.id == data.id ? data : it))
+        localStorage.setItem('todo', JSON.stringify(todos))
+        render()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+btnSubmit.addEventListener('click', async (e) => {
+    e.preventDefault()
+    if (validTodo()) {
+        if (isEdit) {
+            updateTodo()
+        } else {
+            addTodo()
+        }
+    } else {
+        console.log('error')
+    }
+})
+
+const displayForm = (status) => {
+    formTodoElement.style.display = status ? 'block' : 'none'
+    overlayElement.style.display = status ? 'block' : 'none'
+}
+
+btnOpenFormElement.addEventListener('click', () => {
+    displayForm(true)
+})
+
+iconClose.addEventListener('click', () => {
+    displayForm(false)
+    if (isEdit) {
+        isEdit = false
+        titleForm.innerText = 'Add New Todo'
+        btnSubmitForm.innerText = 'Submit'
+        status.style.display = 'none'
+        clearFormTodoValue()
+    }
+})
+
+render()
